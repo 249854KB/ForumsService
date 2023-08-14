@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0A4dxqGp31MVHDMvF3nw39Fng+SwLcvGEzBcvkdWWHwlFQIpUxmiY9qWoO7rgtX5WpuckY4qq9v2rI7lw0zkRw==",
+  "dgSpecHash": "KjcnSyROYo9FRWy5+aKNaYi7W+IRzmtBdx0lSt6iAlZdCu03R6qkZNfuzXFy3nFiQGGbJxK7NMozbg3/b5IU0A==",
   "success": true,
-  "projectFilePath": "C:\\Polibuda\\PSOiR\\PSOiR\\ForumsService\\ForumsService.csproj",
+  "projectFilePath": "c:\\Polibuda\\PSOiR\\PSOiR\\ForumsService\\ForumsService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bortn\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\bortn\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
