@@ -7,12 +7,17 @@ namespace ForumsService.Models
         [Key]
          [Required]
         public int Id { get; set; }
+        
          [Required]
-        public string HowTo { get; set; }
+       public string Title { get; set; }
          [Required]
-        public string CommandLine { get; set; }
+       public string Text { get; set; }
          [Required]
         public int UserId{ get; set; }
+
+        public int DogId { get; set; }
+        [Required]
+        public DateTime Time {get; set; }
         public User User { get; set; }
     }
 }
