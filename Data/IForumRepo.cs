@@ -12,6 +12,7 @@ namespace ForumsService.Data
         bool ExternalUserExists(int userId);
 
         IEnumerable<Forum> GetForumsForUser(int userId);
+        IEnumerable<Forum> GetAllForums();
         Forum GetForum(int userId, int forumId);
         void CreateForum(int userId, Forum forum);
     }

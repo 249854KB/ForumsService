@@ -35,6 +35,12 @@ namespace ForumsService.Data
              return _context.Users.Any(u => u.ExternalID == externalUserId);
         }
 
+        public IEnumerable<Forum> GetAllForums()
+        {
+             return _context.Forums
+            .OrderBy(f=>f.User.Name);
+        }
+
         public IEnumerable<User> GetAllUsers()
         {
             return _context.Users.ToList();
@@ -51,7 +57,7 @@ namespace ForumsService.Data
             return _context.Forums.Where(f=> f.UserId == userId)
             .OrderBy(f=>f.User.Name);
         }
-
+    
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);

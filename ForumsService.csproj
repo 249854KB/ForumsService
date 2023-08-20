@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.54.0" />
     <PackageReference Include="Google.Protobuf" Version="3.23.3" />
     <PackageReference Include="Grpc.Net.Client" Version="2.54.0" />
     <PackageReference Include="Grpc.tools" Version="2.56.0">
@@ -28,4 +29,9 @@
   <ItemGroup>
   <Protobuf Include = "Protocols\users.proto" GrpcServices="Client" />
   </ItemGroup>
+
+  <ItemGroup>
+   <Protobuf Include = "Protocols\forums.proto" GrpcServices="Server" />
+  </ItemGroup>
+  
 </Project>
