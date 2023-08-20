@@ -36,6 +36,7 @@ namespace ForumsService
             services.AddScoped<IForumRepo, ForumRepo>(); //IF they ask for IUser Repo we give them user repo
             services.AddControllers();
             services.AddHostedService<MessageBusSubscriber>();
+            services.AddSingleton<IMessageBusClient, MessageBusClient>();
             services.AddSingleton<IEventProcessor, EventProcessor>(); //Singletone ->> all time alongside 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IUserDataClient, UserDataClient>();  //Registering it

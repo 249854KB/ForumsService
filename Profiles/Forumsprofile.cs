@@ -13,6 +13,7 @@ namespace ForumsService.Profiles
             CreateMap<User, UserReadDto>();
             CreateMap<ForumCreateDto, Forum>();
             CreateMap<Forum, ForumReadDto>();
+            CreateMap<ForumReadDto, ForumPublishedDto>();
             CreateMap<UserPublishedDto, User>()
                 .ForMember(destination =>destination.ExternalID, opt => opt.MapFrom(source => source.Id));
             CreateMap<GrpcUserModel, User>()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using AutoMapper;
+using ForumsService.AsyncDataServices;
 using ForumsService.Data;
 using ForumsService.Dtos;
 using ForumsService.Models;
@@ -14,11 +15,13 @@ namespace ForumsService.Controllers
     {
         private readonly IForumRepo _repository;
         private readonly IMapper _mapper;
+        private readonly IMessageBusClient _messageBusClient;
 
-        public ForumsController(IForumRepo repository, IMapper mapper)
+        public ForumsController(IForumRepo repository, IMapper mapper, IMessageBusClient messageBusClient)
         {
             _repository = repository;
             _mapper = mapper;
+            _messageBusClient = messageBusClient;
         }
 
         [HttpGet]
@@ -72,6 +75,17 @@ namespace ForumsService.Controllers
             _repository.SaveChanges();
 
             var forumReadDto = _mapper.Map<ForumReadDto>(forum);
+
+            try
+            {
+                var forumPublishedDto = _mapper.Map<ForumPublishedDto>(forumReadDto);
+                forumPublishedDto.Event = "Forum_Published";
+                _messageBusClient.PublishNewForum(forumPublishedDto);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"--> Asynchro Error: {ex.Message}");
+            }
 
             return CreatedAtRoute(nameof(GetForumForUser),
                 new {userId = userId, forumId = forumReadDto.Id}, forumReadDto);
