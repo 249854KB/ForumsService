@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ForumsService.Controllers
 {
-    [Route("api/f/users/{userId}/[controller]")]
+    [Route("api/f")]
     [ApiController]
     public class ForumsController : ControllerBase
     {
@@ -24,7 +24,7 @@ namespace ForumsService.Controllers
             _messageBusClient = messageBusClient;
         }
 
-        [HttpGet]
+        [HttpGet("users/{userId}/[controller]", Name = "GetForumsForUser")]
         public ActionResult<IEnumerable<ForumReadDto>> GetForumsForUser(int userId)
         {
             Console.WriteLine($"--> Hit GetForumsForUser: {userId}");
@@ -39,7 +39,24 @@ namespace ForumsService.Controllers
             return Ok(_mapper.Map<IEnumerable<ForumReadDto>>(forums));
         }
 
-        [HttpGet("{forumId}", Name = "GetForumForUser")]
+         [HttpGet("[controller]", Name = "GetAllForums")]
+        public ActionResult<IEnumerable<ForumReadDto>> GetAllForums()
+        {
+            Console.WriteLine($"--> Hit GetAllForums");
+
+
+            var forums = _repository.GetAllForums();
+            if(forums.Count() >0)
+            {
+                return Ok(_mapper.Map<IEnumerable<ForumReadDto>>(forums));
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet("users/{userId}/[controller]/{forumId}", Name = "GetForumForUser")]
         public ActionResult<ForumReadDto> GetForumForUser(int userId, int forumId)
         {
             Console.WriteLine($"--> Hit GetForumForUser: {userId} / {forumId}");
@@ -59,7 +76,7 @@ namespace ForumsService.Controllers
             return Ok(_mapper.Map<ForumReadDto>(forum));
         }
 
-        [HttpPost]
+        [HttpPost("users/{userId}/[controller]", Name ="CreateForumForUser")]
         public ActionResult<ForumReadDto> CreateForumForUser(int userId, ForumCreateDto forumDto)
         {
              Console.WriteLine($"--> Hit CreateForumForUser: {userId}");
